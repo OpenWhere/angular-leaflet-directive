@@ -3,6 +3,7 @@
 "use strict";
 
 angular.module("leaflet-directive", []).directive('leaflet', ["$q", "leafletData", "leafletMapDefaults", "leafletHelpers", "leafletEvents", function ($q, leafletData, leafletMapDefaults, leafletHelpers, leafletEvents) {
+    var lastOverlayEvent;
     var _leafletMap;
     return {
         restrict: "EA",
@@ -725,6 +726,7 @@ angular.module("leaflet-directive").directive('layers', ["$log", "$q", "leafletD
 
                 // Watch for the overlay layers
                 leafletScope.$watch('layers.overlays', function(newOverlayLayers) {
+                    console.log(lastOverlayEvent);
                     // Delete layers from the array
                     for (var name in leafletLayers.overlays) {
                         if (!isDefined(newOverlayLayers[name])) {
